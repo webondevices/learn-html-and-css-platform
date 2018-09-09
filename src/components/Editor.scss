@@ -13,18 +13,21 @@
   width: 100%;
   height: 100px;
 }
-.Editor__editor {
+.Editor__editor-css,
+.Editor__editor-html {
   background-color: rgb(220, 225, 120);
-  width: 50%;
+  width: 33%;
   height: calc(100vh - 150px);
-  padding: 10px;
+  border: 2px solid black;
 
   & > textarea {
     width: 100%;
     height: 100%;
+    font-family: monospace;
+    font-size: 16px;
   }
 }
 .Editor__preview {
-  width: 50%;
+  width: 33%;
   height: calc(100vh - 150px);
 }

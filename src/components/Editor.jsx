@@ -5,15 +5,22 @@ class Editor extends React.Component {
   constructor() {
     super();
     this.state = {
-      style: ""
+      style: "",
+      markup: ""
     };
 
-    this.populateStyle = this.populateStyle.bind(this);
+    this.populateCss = this.populateCss.bind(this);
+    this.populateHtml = this.populateHtml.bind(this);
   }
 
-  populateStyle(event) {
+  populateCss(event) {
     const newStyle = event.target.value;
     this.setState({ style: newStyle });
+  }
+
+  populateHtml(event) {
+    const newMarkup = event.target.value;
+    this.setState({ markup: newMarkup });
   }
 
   render() {
@@ -21,11 +28,17 @@ class Editor extends React.Component {
       <section className="Editor">
         <div className="Editor__progress">{this.props.step} / 100</div>
         <div className="Editor__task">Colour the background red</div>
-        <div className="Editor__editor">
-          <textarea onInput={this.populateStyle} />
-          <style>{`.Editor__preview { ${this.state.style} }`}</style>
+        <div className="Editor__editor-html">
+          <textarea onInput={this.populateHtml} />
         </div>
-        <div className="Editor__preview" />
+        <div className="Editor__editor-css">
+          <textarea onInput={this.populateCss} />
+          <style>{this.state.style}</style>
+        </div>
+        <div
+          className="Editor__preview"
+          dangerouslySetInnerHTML={{ __html: this.state.markup }}
+        />
       </section>
     );
   }
