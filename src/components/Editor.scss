@@ -1,0 +1,30 @@
+.Editor {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.Editor__progress {
+  background-color: rgb(200, 185, 220);
+  width: 100%;
+  height: 50px;
+}
+.Editor__task {
+  background-color: rgb(170, 215, 200);
+  width: 100%;
+  height: 100px;
+}
+.Editor__editor {
+  background-color: rgb(220, 225, 120);
+  width: 50%;
+  height: calc(100vh - 150px);
+  padding: 10px;
+
+  & > textarea {
+    width: 100%;
+    height: 100%;
+  }
+}
+.Editor__preview {
+  width: 50%;
+  height: calc(100vh - 150px);
+}

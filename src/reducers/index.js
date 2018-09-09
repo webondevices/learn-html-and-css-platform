@@ -1,8 +1,8 @@
-import {combineReducers} from 'redux';
-import messages from './messageReducer';
+import { combineReducers } from "redux";
+import progress from "./progressReducer";
 
 const rootReducer = combineReducers({
-    messages: messages
+  progress
 });
 
 export default rootReducer;

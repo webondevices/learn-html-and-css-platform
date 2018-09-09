@@ -1,7 +1,7 @@
-import keyMirror from 'keyMirror';
+import keyMirror from "keyMirror";
 
 const actionTypes = keyMirror({
-    ADD_MESSAGE: null
+  CHANGE_PROGRESS: null
 });
 
 export default actionTypes;

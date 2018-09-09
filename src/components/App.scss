@@ -1,23 +1,10 @@
-$bgColor: white;
-
 body {
-	background-color: $bgColor;
-	
-	h1 {
-		border: 5px solid red;
-	}
+  margin: 0;
+  font-family: sans-serif;
 }
 
-.html-logo {
-	display: block;
-	width: 30px;
-}
-
-.new-message {
-	border: 1px solid gray;
-}
-
-.submit-message {
-	background-color: gray;
-	color: white;
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
 }
