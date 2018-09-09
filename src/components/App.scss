@@ -1,0 +1,23 @@
+$bgColor: white;
+
+body {
+	background-color: $bgColor;
+	
+	h1 {
+		border: 5px solid red;
+	}
+}
+
+.html-logo {
+	display: block;
+	width: 30px;
+}
+
+.new-message {
+	border: 1px solid gray;
+}
+
+.submit-message {
+	background-color: gray;
+	color: white;
+}
