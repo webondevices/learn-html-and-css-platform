@@ -10,14 +10,31 @@ class Editor extends React.Component {
       validationResult: ""
     };
 
+    this.iframeContext = null;
+    this.styleContainer = null;
+    this.bodyContainer = null;
+
     this.populateCss = this.populateCss.bind(this);
     this.populateHtml = this.populateHtml.bind(this);
     this.validate = this.validate.bind(this);
   }
 
+  componentDidMount() {
+    const previewIframe = document.getElementById("previewFrame");
+    this.iframeContext = previewIframe.contentWindow;
+    const doc = this.iframeContext.document;
+
+    const styleElement = document.createElement("style");
+    styleElement.id = "previewStyle";
+    doc.head.appendChild(styleElement);
+    doc.body.id = "previewBody";
+
+    this.styleContainer = doc.getElementById("previewStyle");
+    this.bodyContainer = doc.getElementById("previewBody");
+  }
+
   validate() {
-    let message = this.state.validationResult;
-    let testResult = task1.test();
+    let testResult = task1.test(this.iframeContext);
 
     if (testResult === true) {
       this.setState({ validationResult: "Congratulations!!!" });
@@ -28,12 +45,12 @@ class Editor extends React.Component {
 
   populateCss(event) {
     const newStyle = event.target.value;
-    this.setState({ style: newStyle });
+    this.styleContainer.innerHTML = newStyle;
   }
 
   populateHtml(event) {
     const newMarkup = event.target.value;
-    this.setState({ markup: newMarkup });
+    this.bodyContainer.innerHTML = newMarkup;
   }
 
   render() {
@@ -56,10 +73,9 @@ class Editor extends React.Component {
           <textarea onInput={this.populateCss} />
           <style>{this.state.style}</style>
         </div>
-        <div
-          className="Editor__preview"
-          dangerouslySetInnerHTML={{ __html: this.state.markup }}
-        />
+        <div className="Editor__preview">
+          <iframe id="previewFrame" />
+        </div>
       </section>
     );
   }
