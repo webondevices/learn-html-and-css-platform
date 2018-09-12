@@ -1,7 +1,7 @@
 import actionTypes from "./../constants/actionTypes";
 
 const initialState = {
-  step: 1
+  step: 0
 };
 
 export default function messageReducer(state = initialState, action) {
