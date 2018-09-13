@@ -8,10 +8,11 @@ import { connect } from "react-redux";
 import * as progressActions from "../actions/progressActions";
 
 class App extends React.Component {
-  constructor() {
-    super();
-
+  constructor(props) {
+    super(props);
     this.state = {};
+
+    this.props.actions.getProgress();
   }
 
   render() {

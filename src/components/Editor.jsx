@@ -41,8 +41,6 @@ class Editor extends React.Component {
       validationResult: "",
       valid: false
     });
-    this.populateCss("");
-    this.populateHtml("");
   }
 
   validate() {
