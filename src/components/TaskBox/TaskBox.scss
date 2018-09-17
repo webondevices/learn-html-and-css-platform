@@ -1,0 +1,44 @@
+.Editor__task {
+  width: (100% / 3);
+  height: calc(100vh - 50px);
+  padding: 20px;
+
+  & > h1 {
+    margin: 0;
+  }
+
+  & > button {
+    width: 200px;
+    padding: 10px;
+    background-color: rgb(184, 184, 184);
+    border: none;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    outline: none;
+
+    &.next-task {
+      background-color: green;
+    }
+
+    &:hover {
+      background-color: rgb(154, 154, 154);
+    }
+  }
+
+  & > ol > li {
+    color: black;
+
+    &.done {
+      color: green;
+    }
+  }
+}
+
+.Editor__validation-result {
+  display: block;
+  margin-top: 10px;
+  font-style: italic;
+  color: rgb(224, 17, 17);
+}

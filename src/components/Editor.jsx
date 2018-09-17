@@ -1,5 +1,9 @@
 import React from "react";
-import styles from "./Editor.scss";
+import "./Editor.scss";
+import ProgressBar from "./ProgressBar/ProgressBar.jsx";
+import TaskBox from "./TaskBox/TaskBox.jsx";
+import CodeEditor from "./CodeEditor/CodeEditor.jsx";
+import EditorPreview from "./EditorPreview/EditorPreview.jsx";
 import * as taskList from "./tasks";
 class Editor extends React.Component {
   constructor() {
@@ -8,23 +12,24 @@ class Editor extends React.Component {
       markup: "",
       style: "",
       validationResult: "",
-      valid: false
+      valid: false,
+      editor: "HTML",
+      context: null
     };
 
-    this.iframeContext = null;
     this.styleContainer = null;
     this.bodyContainer = null;
 
     this.nextStep = this.nextStep.bind(this);
     this.populateCss = this.populateCss.bind(this);
     this.populateHtml = this.populateHtml.bind(this);
-    this.validate = this.validate.bind(this);
+    this.switchEditor = this.switchEditor.bind(this);
   }
 
   componentDidMount() {
     const previewIframe = document.getElementById("previewFrame");
-    this.iframeContext = previewIframe.contentWindow;
-    const doc = this.iframeContext.document;
+    const context = previewIframe.contentWindow;
+    const doc = context.document;
 
     const styleElement = document.createElement("style");
     styleElement.id = "previewStyle";
@@ -33,6 +38,10 @@ class Editor extends React.Component {
 
     this.styleContainer = doc.getElementById("previewStyle");
     this.bodyContainer = doc.getElementById("previewBody");
+
+    if (this.state.context === null) {
+      this.setState({ context });
+    }
   }
 
   nextStep() {
@@ -41,23 +50,6 @@ class Editor extends React.Component {
       validationResult: "",
       valid: false
     });
-  }
-
-  validate() {
-    const currentTask = taskList.default[`task${this.props.step}`];
-    let testResult = currentTask.test(this.iframeContext);
-
-    if (testResult === true) {
-      this.setState({
-        validationResult: "Congratulations!!!",
-        valid: true
-      });
-    } else {
-      this.setState({
-        validationResult: testResult,
-        valid: false
-      });
-    }
   }
 
   populateCss(input) {
@@ -74,46 +66,30 @@ class Editor extends React.Component {
     });
   }
 
+  switchEditor(editor) {
+    this.setState({ editor });
+  }
+
   render() {
     const currentTask = taskList.default[`task${this.props.step}`];
 
     return (
       <section className="Editor">
-        <div className="Editor__progress">{this.props.step} / 100</div>
-        <div className="Editor__task">
-          <span>{currentTask.description}</span>
-          <br />
-          <button type="button" onClick={this.validate}>
-            Check
-          </button>
-          <br />
-          <span>{this.state.validationResult}</span>
-          {this.state.valid && (
-            <button type="button" onClick={this.nextStep}>
-              Next
-            </button>
-          )}
-        </div>
-        <div className="Editor__editor-html">
-          <textarea
-            onInput={e => {
-              this.populateHtml(e.target.value);
-            }}
-            value={this.state.markup}
-          />
-        </div>
-        <div className="Editor__editor-css">
-          <textarea
-            onInput={e => {
-              this.populateCss(e.target.value);
-            }}
-            value={this.state.style}
-          />
-          <style>{this.state.style}</style>
-        </div>
-        <div className="Editor__preview">
-          <iframe id="previewFrame" />
-        </div>
+        <TaskBox
+          currentTask={currentTask}
+          nextStep={this.nextStep}
+          context={this.state.context}
+        />
+        <CodeEditor
+          editor={this.state.editor}
+          switchEditor={this.switchEditor}
+          markup={this.state.markup}
+          style={this.state.style}
+          populateHtml={this.populateHtml}
+          populateCss={this.populateCss}
+        />
+        <EditorPreview />
+        <ProgressBar currentStep={this.props.step} totalSteps="100" />
       </section>
     );
   }
