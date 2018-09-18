@@ -24,12 +24,12 @@ const CodeEditor = ({
     </button>
     {editor === "HTML" && (
       <div className="Editor__editor-html">
-        <textarea onInput={e => populateHtml(e.target.value)} value={markup} />
+        <textarea onChange={e => populateHtml(e.target.value)} value={markup} />
       </div>
     )}
     {editor === "CSS" && (
       <div className="Editor__editor-css">
-        <textarea onInput={e => populateCss(e.target.value)} value={style} />
+        <textarea onChange={e => populateCss(e.target.value)} value={style} />
       </div>
     )}
   </div>

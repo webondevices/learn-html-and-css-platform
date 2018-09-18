@@ -27,6 +27,8 @@ export const taskList = [
         const computedStyles = context.getComputedStyle(heading);
         const color = computedStyles.getPropertyValue("color");
         return color === "rgb(255, 0, 0)";
+      } else {
+        return false;
       }
     }
   }

@@ -16,7 +16,10 @@ class TaskBox extends React.Component {
   static getDerivedStateFromProps(props, state) {
     const { currentTask } = props;
 
+    console.log(currentTask.id, " !== ", state.currentTask.id);
+
     if (currentTask.id !== state.currentTask.id) {
+      console.log("New ID, re-render");
       return {
         currentTask,
         valid: false
@@ -31,11 +34,13 @@ class TaskBox extends React.Component {
       currentTask: {
         id: this.state.currentTask.id,
         description: this.state.currentTask.description,
-        taskList: this.state.currentTask.taskList.map(task => ({
-          description: task.description,
-          validation: task.validation,
-          done: task.validation(this.props.context)
-        }))
+        taskList: this.state.currentTask.taskList.map(task => {
+          return {
+            description: task.description,
+            validation: task.validation,
+            done: task.validation(this.props.context)
+          };
+        })
       },
       valid: this.state.currentTask.taskList.every(task =>
         task.validation(this.props.context)
@@ -44,7 +49,7 @@ class TaskBox extends React.Component {
   }
 
   render() {
-    console.log(this.state.currentTask);
+    console.log("UPDATE", this.state.currentTask);
     return (
       <div className="Editor__task">
         <span>{this.props.currentTask.description}</span>

@@ -19,11 +19,15 @@
     outline: none;
 
     &.next-task {
-      background-color: green;
+      background-color: rgb(20, 160, 20);
+
+      &:hover {
+        background-color: darken(rgb(20, 160, 20), 10%);
+      }
     }
 
     &:hover {
-      background-color: rgb(154, 154, 154);
+      background-color: darken(rgb(184, 184, 184), 10%);
     }
   }
 
