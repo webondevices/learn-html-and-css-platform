@@ -7,9 +7,10 @@ const CodeEditor = ({
   markup,
   style,
   populateHtml,
-  populateCss
+  populateCss,
+  className
 }) => (
-  <div className="Editor__codeEditor">
+  <div className={`Editor__codeEditor ${className}`}>
     <button
       className={`Editor__languageSelector ${editor === "HTML" && "active"}`}
       onClick={() => switchEditor("HTML")}

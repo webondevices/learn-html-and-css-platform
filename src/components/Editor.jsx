@@ -17,7 +17,8 @@ class Editor extends React.Component {
       validationResult: "",
       valid: false,
       editor: "HTML",
-      context: null
+      context: null,
+      fullscreen: false
     };
 
     this.styleContainer = null;
@@ -28,6 +29,7 @@ class Editor extends React.Component {
     this.populateCss = this.populateCss.bind(this);
     this.populateHtml = this.populateHtml.bind(this);
     this.switchEditor = this.switchEditor.bind(this);
+    this.toggleFullscreen = this.toggleFullscreen.bind(this);
 
     window.onunload = this.saveEditor;
   }
@@ -84,6 +86,10 @@ class Editor extends React.Component {
     this.setState({ editor });
   }
 
+  toggleFullscreen() {
+    this.setState({ fullscreen: !this.state.fullscreen });
+  }
+
   render() {
     const currentTask = taskList.default[`task${this.props.step}`];
 
@@ -91,12 +97,14 @@ class Editor extends React.Component {
       <section className="Editor">
         {this.state.context && (
           <TaskBox
+            className={this.state.fullscreen && "fullscreen-mode"}
             currentTask={currentTask}
             nextStep={this.nextStep}
             context={this.state.context}
           />
         )}
         <CodeEditor
+          className={this.state.fullscreen && "fullscreen-mode"}
           editor={this.state.editor}
           switchEditor={this.switchEditor}
           markup={this.state.markup}
@@ -104,8 +112,14 @@ class Editor extends React.Component {
           populateHtml={this.populateHtml}
           populateCss={this.populateCss}
         />
-        <EditorPreview />
+        <EditorPreview className={this.state.fullscreen && "fullscreen-mode"} />
         <ProgressBar currentStep={this.props.step} totalSteps="100" />
+        <button
+          className="Editor__fullscreen-button"
+          onClick={this.toggleFullscreen}
+        >
+          Fullscreen
+        </button>
       </section>
     );
   }

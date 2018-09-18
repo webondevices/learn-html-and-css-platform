@@ -1,6 +1,12 @@
 .Editor__codeEditor {
   width: (100% / 3);
   height: calc(100vh - 50px);
+
+  &.fullscreen-mode {
+    width: 0;
+    padding: 0;
+    overflow: hidden;
+  }
 }
 .Editor__editor-css,
 .Editor__editor-html {

@@ -50,7 +50,7 @@ class TaskBox extends React.Component {
 
   render() {
     return (
-      <div className="Editor__task">
+      <div className={`Editor__task ${this.props.className}`}>
         <span>{this.props.currentTask.description}</span>
         <br />
         <ol>
