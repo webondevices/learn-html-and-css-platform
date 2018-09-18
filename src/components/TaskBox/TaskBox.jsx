@@ -51,8 +51,7 @@ class TaskBox extends React.Component {
   render() {
     return (
       <div className={`Editor__task ${this.props.className}`}>
-        <span>{this.props.currentTask.description}</span>
-        <br />
+        {this.props.currentTask.description}
         <ol>
           {this.state.currentTask.taskList.map(task => (
             <li

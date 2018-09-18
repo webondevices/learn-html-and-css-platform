@@ -31,17 +31,13 @@
 }
 .Editor__languageSelector {
   width: 50%;
-  appearance: none;
-  border: none;
   height: 30px;
   font-weight: bold;
-  outline: none;
-  cursor: pointer;
 
   &.active {
     background-color: rgb(60, 60, 60);
     color: white;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
   }
 }

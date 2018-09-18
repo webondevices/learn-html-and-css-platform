@@ -2,6 +2,7 @@
   width: (100% / 3);
   height: calc(100vh - 50px);
   padding: 20px;
+  background-color: rgb(240, 240, 240);
 
   &.fullscreen-mode {
     width: 0;
@@ -14,27 +15,23 @@
   }
 
   & > button {
-    width: 200px;
-    padding: 10px;
     background-color: rgb(184, 184, 184);
-    border: none;
-    font-weight: bold;
-    font-size: 14px;
-    border-radius: 4px;
-    cursor: pointer;
-    outline: none;
-
-    &.next-task {
-      background-color: rgb(20, 160, 20);
-
-      &:hover {
-        background-color: darken(rgb(20, 160, 20), 10%);
-      }
-    }
 
     &:hover {
       background-color: darken(rgb(184, 184, 184), 10%);
     }
+  }
+
+  & > button.next-task {
+    background-color: rgb(20, 160, 20);
+
+    &:hover {
+      background-color: darken(rgb(20, 160, 20), 10%);
+    }
+  }
+
+  & > ol {
+    margin-top: 0;
   }
 
   & > ol > li {
