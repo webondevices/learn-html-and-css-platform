@@ -10,8 +10,6 @@ import * as progressActions from "../actions/progressActions";
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
-
     this.props.actions.getProgress();
   }
 

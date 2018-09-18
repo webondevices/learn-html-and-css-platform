@@ -13,13 +13,13 @@ class TaskBox extends React.Component {
     this.validate = this.validate.bind(this);
   }
 
+  componentDidMount() {
+    this.validate();
+  }
+
   static getDerivedStateFromProps(props, state) {
     const { currentTask } = props;
-
-    console.log(currentTask.id, " !== ", state.currentTask.id);
-
     if (currentTask.id !== state.currentTask.id) {
-      console.log("New ID, re-render");
       return {
         currentTask,
         valid: false
@@ -49,7 +49,6 @@ class TaskBox extends React.Component {
   }
 
   render() {
-    console.log("UPDATE", this.state.currentTask);
     return (
       <div className="Editor__task">
         <span>{this.props.currentTask.description}</span>

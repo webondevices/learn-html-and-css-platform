@@ -8,9 +8,12 @@ import * as taskList from "./tasks";
 class Editor extends React.Component {
   constructor() {
     super();
+    const savedMarkup = localStorage.getItem("markup");
+    const savedStyle = localStorage.getItem("style");
+
     this.state = {
-      markup: "",
-      style: "",
+      markup: savedMarkup ? savedMarkup : "",
+      style: savedStyle ? savedStyle : "",
       validationResult: "",
       valid: false,
       editor: "HTML",
@@ -20,10 +23,13 @@ class Editor extends React.Component {
     this.styleContainer = null;
     this.bodyContainer = null;
 
+    this.saveEditor = this.saveEditor.bind(this);
     this.nextStep = this.nextStep.bind(this);
     this.populateCss = this.populateCss.bind(this);
     this.populateHtml = this.populateHtml.bind(this);
     this.switchEditor = this.switchEditor.bind(this);
+
+    window.onunload = this.saveEditor;
   }
 
   componentDidMount() {
@@ -42,6 +48,14 @@ class Editor extends React.Component {
     if (this.state.context === null) {
       this.setState({ context });
     }
+
+    this.populateCss(this.state.style);
+    this.populateHtml(this.state.markup);
+  }
+
+  saveEditor() {
+    localStorage.setItem("style", this.state.style);
+    localStorage.setItem("markup", this.state.markup);
   }
 
   nextStep() {
@@ -75,11 +89,13 @@ class Editor extends React.Component {
 
     return (
       <section className="Editor">
-        <TaskBox
-          currentTask={currentTask}
-          nextStep={this.nextStep}
-          context={this.state.context}
-        />
+        {this.state.context && (
+          <TaskBox
+            currentTask={currentTask}
+            nextStep={this.nextStep}
+            context={this.state.context}
+          />
+        )}
         <CodeEditor
           editor={this.state.editor}
           switchEditor={this.switchEditor}
