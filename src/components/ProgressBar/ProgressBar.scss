@@ -5,6 +5,7 @@
   color: white;
   display: flex;
   justify-content: space-between;
+  position: relative;
 
   & > .wizard-icon {
     width: 40px;
@@ -31,5 +32,14 @@
   & > .navigation-section > span {
     font-size: 22px;
     font-weight: 100;
+  }
+
+  & > .progress-display {
+    height: 5px;
+    transition: width 300ms;
+    background-color: #673ab7;
+    position: absolute;
+    left: 0;
+    top: -5px;
   }
 }

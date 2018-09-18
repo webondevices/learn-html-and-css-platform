@@ -113,7 +113,7 @@ class Editor extends React.Component {
           populateCss={this.populateCss}
         />
         <EditorPreview className={this.state.fullscreen && "fullscreen-mode"} />
-        <ProgressBar currentStep={this.props.step} totalSteps="100" />
+        <ProgressBar currentStep={this.props.step} totalSteps="10" />
         <button
           className="Editor__fullscreen-button"
           onClick={this.toggleFullscreen}

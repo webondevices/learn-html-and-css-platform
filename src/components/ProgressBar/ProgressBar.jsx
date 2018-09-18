@@ -13,6 +13,10 @@ const ProgressBar = ({ currentStep, totalSteps }) => (
       <button className="next-button">&gt;</button>
     </div>
     <button className="home-button">Home</button>
+    <div
+      className="progress-display"
+      style={{ width: `${(currentStep / totalSteps) * 100}%` }}
+    />
   </div>
 );
 
